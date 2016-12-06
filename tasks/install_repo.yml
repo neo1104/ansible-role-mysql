@@ -1,0 +1,17 @@
+---
+- name: set selinux state to permissive
+  selinux:
+    state: disabled
+  changed_when: False
+
+- name: install MySQL-python
+  yum:
+    name: MySQL-python
+    state: present
+    update_cache: yes
+    
+- name: install mysql57 offical repo
+  yum:
+    name: http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
+    state: present
+    update_cache: yes

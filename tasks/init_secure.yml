@@ -1,0 +1,26 @@
+---
+- name: get mysql init passwd
+  shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $11}'
+  register: mysql_init_pwd
+
+- name: reset root passwd
+  shell: >
+    mysql -u root --connect-expired-password=true --password='{{ mysql_init_pwd.stdout }}' -NBe
+    "ALTER USER '{{ mysql_root_username }}'@'localhost' IDENTIFIED BY '{{ mysql_root_password }}';"
+
+- name: prohibit root remote login
+  shell: >
+    mysql -u root --password='{{ mysql_root_password }}' -NBe
+    "delete from mysql.user where user='{{ mysql_root_username }}' and host not in ('localhost', '127.0.0.1', '::1');"
+
+- name: delete anonymous mysql user
+  shell: >
+    mysql -u root --password='{{ mysql_root_password }}' -NBe
+    "delete from mysql.user where user='';"
+
+- name: remove mysql test db
+  mysql_db:
+    name: test
+    state: absent
+    login_user: "{{ mysql_root_username }}"
+    login_password: "{{ mysql_root_password }}"

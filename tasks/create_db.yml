@@ -1,0 +1,31 @@
+---
+
+- name: create needed mysql db
+  mysql_db:
+    name: "{{ item.db }}"
+    login_user: "{{ mysql_root_username }}"
+    login_password: "{{ mysql_root_password }}"
+    encoding: utf8
+    state: present
+  with_items: "{{ mysql_create_db }}"
+
+- name: create needed mysql user
+  mysql_user:
+    name: "{{ item.user }}"
+    login_user: "{{ mysql_root_username }}"
+    login_password: "{{ mysql_root_password }}"
+    password: "{{ item.password }}"
+    host: "{{ item.host }}"
+    priv: "{{ item.db }}.*:ALL"
+    state: present
+  with_items: "{{ mysql_create_db }}"
+
+- name: import db data
+  mysql_db:
+    name: "{{ item.db }}"
+    login_user: "{{ item.user}}"
+    login_password: "{{ item.password }}"
+    target: "{{ item.target }}"
+    state: import
+  when: item.target
+  with_items: "{{ mysql_create_db }}"

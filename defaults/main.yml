@@ -1,0 +1,10 @@
+---
+# defaults file for roles/mysql
+mysql_datadir: /var/lib/mysql
+mysql_sock: /var/lib/mysql/mysql.sock
+mysql_log: /var/log/mysqld.log
+mysql_pid: /var/run/mysqld/mysqld.pid
+mysql_root_password: Teddytian7,
+mysql_root_username: root
+mysql_first_install: False
+mysql_create_db: []
