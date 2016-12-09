@@ -1,0 +1,8 @@
+---
+- include: install_server.yml
+- include: configure.yml
+- include: service.yml
+# 如果是第一次启动mysql, 则进行安全化配置
+- include: init_secure.yml
+  when: mysql_install_result.changed or mysql_first_install
+- include: create_db.yml

@@ -2,16 +2,8 @@
 # tasks file for roles/mysql
 - include: install_repo.yml
 
-- include: install_server.yml
-  when: mysql_install_type == "server"
-- include: configure.yml
-  when: mysql_install_type == "server"
-- include: service.yml
+- include: mysql_server.yml
   when: mysql_install_type == 'server'
-# 如果是第一次启动mysql, 则进行安全化配置
-- include: init_secure.yml
-  when: mysql_install_type == 'server' and mysql_install_result.changed or mysql_first_install
-- include: create_db.yml
-  when: mysql_install_type == 'server'
+
 - include: install_client.yml
   when: mysql_install_type == "client"
