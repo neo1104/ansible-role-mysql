@@ -1,6 +1,6 @@
 ---
 - name: install mysql57 client
   yum:
-    name: mysql57-community-client
+    name: mysql-community-client
     enablerepo: mysql57-community
     update_cache: yes
