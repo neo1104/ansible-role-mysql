@@ -1,9 +1,12 @@
 ---
 # tasks file for roles/mysql
-- include: install_repo.yml
+- name: include  install_repo.yml
+  include: install_repo.yml
 
-- include: mysql_server.yml
+- name: include mysql_server.yml when mysql_install_type == 'server'
+  include: mysql_server.yml
   when: mysql_install_type == 'server'
 
-- include: install_client.yml
+- name: include install_client.yml when mysql_install_type == 'client'
+  include: install_client.yml
   when: mysql_install_type == "client"
