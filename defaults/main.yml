@@ -1,6 +1,7 @@
 ---
 # defaults file for roles/mysql
 mysql_datadir: /var/lib/mysql
+mysql_tmpdir: /tmp
 mysql_sock: /var/lib/mysql/mysql.sock
 mysql_log: /var/log/mysqld.log
 mysql_pid: /var/run/mysqld/mysqld.pid
