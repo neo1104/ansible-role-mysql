@@ -8,10 +8,10 @@
   yum:
     name: MySQL-python
     state: present
-    update_cache: yes
-    
+    update_cache: no
+
 - name: install mysql57 offical repo
   yum:
     name: http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
     state: present
-    update_cache: yes
+    update_cache: no

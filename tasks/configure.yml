@@ -1,4 +1,11 @@
 ---
+
+- name: copy .my.cnf to home dir
+  template:
+    src: .my.cnf.j2
+    dest: "/{{ ansible_user }}/.my.cnf"
+    mode: 0600
+
 - name: configure mysql server
   template:
     src: my.cnf.j2

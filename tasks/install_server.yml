@@ -4,5 +4,5 @@
     name: mysql-community-server
     state: present
     enablerepo: mysql57-community
-    update_cache: yes
+    update_cache: no
   register: mysql_install_result

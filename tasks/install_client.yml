@@ -3,4 +3,4 @@
   yum:
     name: mysql-community-client
     enablerepo: mysql57-community
-    update_cache: yes
+    update_cache: no
