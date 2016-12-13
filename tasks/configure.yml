@@ -4,4 +4,4 @@
     src: my.cnf.j2
     dest: /etc/my.cnf
   notify:
-    - name: restart mysql server
+    - restart mysql server
